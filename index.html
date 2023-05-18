@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PQRS ADL</title>
+  </head>
+  <body>
+    <h1>PQRS</h1>
+    <form id="pqr-form">
+      <label for="depto-selector">Selecciona el departamento:</label><br>
+      <select name="depto-selector" id="depto-selector">
+        <option value="RECURSOS HUMANOS">RECURSOS HUMANOS</option>
+        <option value="ATENCION AL USUARIO">ATENCIÓN AL USUARIO</option>
+        <option value="PORTERIA">PORTERIA</option>
+      </select>
+      <br><br>
+      <label for="pqr-textarea">Escribe tu PQR:</label><br>
+      <textarea name="pqr-textarea" id="pqr-textarea" rows="4" cols="50"></textarea>
+      <br><br>
+      <input type="submit" value="Enviar">
+    </form>
+
+    <script>
+      const form = document.getElementById('pqr-form');
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+      
+        const selectorValue = document.getElementById('depto-selector').value;
+        const textareaValue = document.getElementById('pqr-textarea').value;
+    
+        console.log('Selector:', selectorValue);
+        console.log('Textarea:', textareaValue);
+
+        const onSuccess = res => {
+          console.log({res});
+        }
+
+        google.script.run.withSuccessHandler(onSuccess).registerData(selectorValue, textareaValue);
+      });
+    </script>
+  </body>
+</html>
