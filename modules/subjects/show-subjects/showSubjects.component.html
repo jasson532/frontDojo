@@ -1,0 +1,66 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nombre Asignatura</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let subject of subjects">
+        <th scope="row">{{ subject.id }}</th>
+        <td>{{ subject.nombre }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="openModalForm(subject)">Editar</button>
+        </td>
+        <td>
+          <button class="btn btn-danger" (click)="openModalDelete(subject)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal form subject -->
+<div class="modal fade" id="modalFormSubject" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalLabel"></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <register-subjects
+          [subject]="subject"
+          title="Actualización de Asignatura"
+          labelAction="Actualizar Asignatura"
+          (closeModal)="closeModalForm()"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal delete subject -->
+<div class="modal fade" id="modalDeleteSubject" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalLabel">Advertencia</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Está seguro que desea eliminar definitivamente la Asignatura <b>{{subject.nombre}}</b></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="deleteSubject(subject)">Si Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

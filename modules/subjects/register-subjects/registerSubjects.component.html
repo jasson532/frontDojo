@@ -1,0 +1,14 @@
+<div class="container">
+  <h2>{{title}}</h2>
+  <form (submit)="submitForm($event)">
+    <div class="mb-3">
+      <label for="nameSubject" class="form-label">Nombre de Asignatura</label>
+      <input type="text" class="form-control" id="nameSubject" placeholder="asignatura" #nameSubject [value]="subject?.nombre??null" required>
+    </div>
+    
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary mb-3" (click)="registerSubject(nameSubject.value)">{{labelAction}}</button>
+    </div>
+  </form>
+  <div id="alert-register"></div>
+</div>

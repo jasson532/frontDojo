@@ -1,0 +1,29 @@
+<div class="container">
+  <h2>{{title}}</h2>
+  <form (submit)="submitForm($event)">
+    <div class="mb-3">
+      <label for="inputCode" class="form-label">Código</label>
+      <input type="text" class="form-control" id="inputCode" placeholder="000" #codigoInput [value]="student?.codigo??null" [disabled]="disabledCode" required>
+    </div>
+    <div class="mb-3">
+      <label for="inputIdentification" class="form-label">Identificación</label>
+      <input type="text" class="form-control" id="inputIdentification" placeholder="00000000" #identificacionInput [value]="student?.identificacion??null" required>
+    </div>
+    <div class="mb-3">
+      <label for="inputName" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="inputName" placeholder="Pepito" #nombreInput [value]="student?.nombre??null" required>
+    </div>
+    <div class="mb-3">
+      <label for="inputLastName" class="form-label">Apellido</label>
+      <input type="text" class="form-control" id="inputLastName" placeholder="Perez" #apellidoInput [value]="student?.apellido??null" required>
+    </div>
+    <div class="mb-3">
+      <label for="inputFecha" class="form-label">Fecha de Nacimiento</label>
+      <input type="date" class="form-control" id="inputFecha" #fechaNacimientoInput name="fechanato" [(ngModel)]="student.fechanato" required>
+    </div>
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary mb-3" (click)="registerStudent(codigoInput.value, identificacionInput.value, nombreInput.value, apellidoInput.value, fechaNacimientoInput.value)">{{labelAction}}</button>
+    </div>
+  </form>
+  <div id="alert-register"></div>
+</div>

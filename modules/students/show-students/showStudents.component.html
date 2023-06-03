@@ -1,0 +1,72 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Código</th>
+        <th scope="col">Identificación</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Fecha Nacimiento</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let estudiante of students">
+        <th scope="row">{{ estudiante.codigo }}</th>
+        <td>{{ estudiante.identificacion }}</td>
+        <td>{{ estudiante.nombre }}</td>
+        <td>{{ estudiante.apellido }}</td>
+        <td>{{ formatDates(estudiante.fechanato) }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="openModalForm(estudiante)">Editar</button>
+        </td>
+        <td>
+          <button class="btn btn-danger" (click)="openModalDelete(estudiante)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal form student -->
+<div class="modal fade" id="modalFormStudent" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalLabel"></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <register-student
+          [student]="student"
+          [disabledCode]="true"
+          title="Actualización de Estudiante"
+          labelAction="Actualizar Estudiante"
+          (closeModal)="closeModalForm()"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal delete student -->
+<div class="modal fade" id="modalDeleteStudent" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalLabel">Advertencia</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Está seguro que desea eliminar definitivamente a <b>{{student.nombre}} {{student.apellido}}</b></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="deleteStudent(student)">Si Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

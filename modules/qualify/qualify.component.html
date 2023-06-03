@@ -1,0 +1,62 @@
+<div class="container">
+
+  <div class="row row-cols-2 row-cols-lg-3 g-2 g-lg-3">
+    <div class="col-6">
+      <div class="form-floating">
+        <select class="form-select" id="floatingStudent" aria-label="Floating label select example" (change)="getQualifies($event, 'student')">
+          <option selected></option>
+          <option *ngFor="let student of students" [value]="student.codigo">{{student.nombre}} {{student.apellido}}</option>
+        </select>
+        <label for="floatingStudent">Estudiante</label>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-floating">
+        <select class="form-select" id="floatingSubject" aria-label="Floating label select example" (change)="getQualifies($event, 'subject')">
+          <option selected></option>
+          <option *ngFor="let subject of subjects" [value]="subject.id">{{subject.nombre}}</option>
+        </select>
+        <label for="floatingSubject">Asignatura</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- informacion asignatura y estudiante  -->
+  <hr />
+  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3" *ngIf="qualifies.length>0 && !!qualifies[0].nombre">
+    <div class="col">
+      <div class="badge bg-primary text-wrap" style="font-size: 20px">
+        {{qualifies[0].asignatura}}
+      </div>
+    </div>
+    <div class="col">
+      <div class="text-capitalize" class="info-student">
+        <b>{{qualifies[0].codigo}}</b> {{qualifies[0].nombre}} {{qualifies[0].apellido}}
+      </div>
+    </div>
+  </div>
+
+  <!-- tabla que muestra las notas -->
+  <br />
+  <table class="table" *ngIf="qualifies.length>0 && !!qualifies[0].nombre">
+    <thead>
+      <tr>
+        <th scope="col">Periodo</th>
+        <th scope="col">Nota</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let qualify of qualifies; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ qualify.nota }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Promedio</th>
+        <td><b>{{calcularPromedioNotas()}}</b></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
